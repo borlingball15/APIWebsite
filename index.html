@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API</title>
+</head>
+<body>
+    <h1>Test the Chatbot API</h1>
+    <input type="text" id="userMessage" placeholder="Type a message">
+    <button id="sendMessage">Send Message</button>
+    <p id="response"></p>
+
+    <script>
+        // Handle the button click event
+        document.getElementById("sendMessage").addEventListener("click", async () => {
+            const message = document.getElementById("userMessage").value;
+            if (!message) {
+                alert("Please type a message");
+                return;
+            }
+
+            // Send the message to the server via POST request
+            const response = await fetch('http://localhost:3000/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message })
+            });
+
+            const data = await response.json();
+            document.getElementById("response").textContent = "Bot says: " + data.response;
+        });
+    </script>
+</body>
+</html>
