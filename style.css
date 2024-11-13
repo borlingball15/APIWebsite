@@ -1,0 +1,135 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: "Helvetica Neue", sans-serif;
+  }
+  
+  #opening-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: orange;
+    position: relative;
+    text-align: center;
+  }
+  
+  #title {
+    font-size: 100px;
+    color: black;
+    text-transform: lowercase;
+    margin: 0;
+    transition: color 0.3s;
+    position: relative; /* Needed for the x-ray effect */
+  }
+  
+  #enter-button {
+    font-size: 1.5em;
+    color: black;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+    margin-top: 20px;
+    position: relative; /* Needed for the x-ray effect */
+  }
+  
+  #cursor {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    pointer-events: none;
+    transition: background-color 0.3s, transform 0.2s;
+    transform: translate(-50%, -50%);
+  }
+  
+  .hovering {
+    color: white;
+  }
+  
+  #cursor.hover {
+    background-color: black;
+  }
+  
+  #chat-interface {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+    display: none;
+  }
+  
+  #chat-box {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  #chat-output {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+  
+  #user-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  
+  #send-button {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #send-button:hover {
+    background-color: darkorange;
+  }
+  
+  /* X-ray effect */
+  .xray {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .xray .xray-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    opacity: 0.5;
+    pointer-events: none;
+    transform: scale(1.2);
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .xray:hover .xray-effect {
+    opacity: 0;
+  }
+  
