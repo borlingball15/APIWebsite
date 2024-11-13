@@ -4,22 +4,8 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
-// Enable CORS for specific origins (production and local)
 app.use(cors({
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      'https://borlingball15.github.io',  // Production URL
-      'http://127.0.0.1:5500',           // Local development URL
-      'http://localhost:5500'             // Localhost (alternative)
-    ];
-    
-    // Allow requests without an origin (like Postman or mobile apps)
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: '*',  // Allow all origins for debugging
   methods: ['POST', 'GET'],
   allowedHeaders: ['Content-Type'],
 }));
