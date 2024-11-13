@@ -4,11 +4,25 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
-// Enable CORS
+// Enable CORS for specific origins (production and local)
 app.use(cors({
-  origin: 'https://borlingball15.github.io/APIWebsite/'  // front end url
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'https://borlingball15.github.io',  // Production URL
+      'http://127.0.0.1:5500',           // Local development URL
+      'http://localhost:5500'             // Localhost (alternative)
+    ];
+    
+    // Allow requests without an origin (like Postman or mobile apps)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['POST', 'GET'],
+  allowedHeaders: ['Content-Type'],
 }));
-
 
 // Middleware to parse JSON requests
 app.use(express.json());
@@ -36,7 +50,6 @@ const chatbotResponses = {
   "yea": "bless thats good",
   "no": "damn sorry ab that",
   "nah": " sorry ab that",
-  "wyd": "nun much just vibin. wbu",
   "song recommendation": "no pole - don toliver. its been on loop for me",
   "what's the weather": " idk you should go out and see maybe ",
 };
@@ -47,7 +60,7 @@ app.post('/chat', (req, res) => {
   console.log("Received message:", userMessage);  // Log the incoming message
   let response = chatbotResponses[userMessage] || chatbotResponses["default"];
   console.log("Response:", response);  // Log the response
-  res.json({ response });
+  res.json({ response });  // Send back the response as JSON
 });
 
 // Start the server
